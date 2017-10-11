@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <title>Coleção Eu gosto m@is - Editora IBEP - 2ª Edição 2012 - Ensino Fundamental - Testes</title>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="author" content="Rafael Kellows - rafaelkellows@hotmail.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="css/personal/stylesheet.css" rel="stylesheet" media="screen">
+
+    <!-- Owl Carousel Assets -->
+    <link href="css/owl-carousel/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl-carousel/owl.theme.css" rel="stylesheet">
+
+    <!-- build:css css/styles.min.css-->
+    <link href="css/reset.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+    <!-- endbuild-->
+    <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="images/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="images/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="images/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="images/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="images/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="images/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16.png">
+    <link rel="manifest" href="images/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <style type="text/css">
+      body{ background: url('images/imagemMateria.png') center 0 no-repeat #342a5c; }
+      main{ padding-top: 40px }
+      .questions{ display: none; }
+      .puzzle{ text-align: center; font-size: 1.8em; line-height: 1.2em; }
+      .puzzle *:not(input){ color: #fff;  }
+      p img{ margin: 15px auto 0; }
+      p.theme br{ display:none; }
+      strong, span{ display: inline; font-weight: bold; }
+      dl dt{ font-size: 2em; padding-bottom: 25px; line-height: 1em; }
+      dl dd ul{ width: 75%; margin: 0 auto; }
+      dl dd ul li{ text-align: left; margin: .5em 0; }
+      dl dd ul li:hover, dl dd ul li:hover *:not(input){ color:#ff6600; }
+      dl dd ul li label{ cursor:pointer; display: inline-block; width: 90%; }
+      input[type=button]{ color: #f0c004; padding: .2em .5em; margin: 0 .5em; cursor:pointer; background-color: #342a5c; border: 1px solid #0898ca; border-radius: 6px; box-sizing: border-box; }
+      input[type=text]{ padding: .2em .5em; margin: 0 .5em; text-align: center; border: 1px solid #0898ca; border-radius: 6px; box-sizing: border-box; }
+      input[type=button]:hover{ color: #e8511c; }
+      .btnRestart{ display: none; }
+      select, option{ color: #332755 !important; font-size: 1em; padding: 0.165em .5em; border: 0; }
+      @media screen and (max-width: 480px) and (min-width: 320px){
+        body{ background-size: 110%; }
+        body main{ padding: 0; }
+        p img{ width: 80% }
+        p.theme br{ display:block; }
+        p.steps{ font-size: 0.7em; }
+        .puzzle{ font-size: 1.6em; line-height: 1em; padding: 0.5em; }
+        .intro > br{ display: none; }
+        select{ width: 100%; display: block; font-size: .7em; margin: .5em auto; }
+        input[type=button]{ margin: .5em 0 0 0; font-size: 0.9em; }
+        input[type=text]{ margin: 0; width: 100%; box-sizing: border-box; padding: 0.1em 0.5em; }
+        dl{ padding: 0 .5em; }
+        dl dt{ font-size: 1.2em; }
+        dl dd ul{ width: 100%; }
+        dl dd ul li label{ width: 85%; vertical-align: top; }
+        dl dd ul li input[type=radio]{ display: inline-block; vertical-align: middle; }
+      }
+    </style> 
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+
+  </head>
+  <body>
+    
+    <main>
+      <form class="puzzle">
+        <div class="intro">
+          <p style="font-size: .7em; font-weight: bold">Perguntas baseadas na Coleção <br><img src="images/imagemColecao.png" /><br>Editora IBEP - 2ª Edição 2012 - Ensino Fundamental</p>
+          <p>Defina nos campos abaixo seu teste e clique em COMEÇAR.<br><strong>Boa Sorte</strong>!</p><br>
+          <select name="levelSlct">
+            <option value="">Nivel de Dificuldade</option>
+            <option value="0">Fácil</option>
+            <option value="1">Médio</option>
+            <option value="2">Difícil</option>
+          </select>
+          <select name="themeSelect">
+            <option value="">Qual matéria você vai estudar?</option>
+            <option value="historia">História</option>
+            <option value="historia">História</option>
+            <option value="matematica">Matemática</option>
+          </select>
+          <select name="qAmount">
+            <option value="">Quantas perguntas você quer responder?</option>
+            <!--option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option-->
+          </select>
+          <input type="button" disabled="disabled" class="btnBegin" value="COMEÇAR">
+        </div>
+        <div class="questions">
+          <p class="theme"><!-- Passos --></p>
+          <p class="steps"><!-- Passos --></p>
+          <br>
+          <dl>
+            <dt><!-- Perguntas --></dt>
+            <dd> 
+              <ul>
+                <!-- Respostas -->
+              </ul>
+          </dl>
+          <input type="button" class="btnCancel" value="CANCELAR"> <input class="btnConfirm" type="button" value="CONFIRMAR"> <input class="btnRestart" type="button" value="FAZER O TESTE DE NOVO">
+        <div>
+      </form>
+
+    </main>
+
+    <!-- build:js js/puzzle.js -->
+    <script type="text/javascript" src="js/puzzle.js"></script>
+    <!-- endbuild -->
+  </body>
+</html>
