@@ -2,117 +2,39 @@ $(function(){
 	(function() {
 	    var sortQuestions = [],  sortAnswers = [], answers = [], oAnswers = [];
     	var _itens = 0, _level = '', _levelLabel = '', _maxCalcQuestions = 5; //questions amount limit set on "starting" obj;
-		var _v,_t,_l,loadQuestion,rndQuestions;
+		var _v,_t,loadQuestion;
     	var currQuestion = 0; currAnswer = null;
 		var sqPuzzle = {
 	        init: function() {
 	        	this.loading();
-	        	//this.starting();
-	        	this.loadJson();
+	        	this.starting();
+	        	//this.loadJson('historia');
 	        },
 	        loading : function(){
 	        	$(window).load(function(){
 					$('.loading').removeClass('active');
 	        	});
 	        },
-	        starting : function(json){
-			    $('select[name=themeSelect]').html("<option value=''>Qual matéria você vai estudar?</option>");
-		    	for (var i=0; i<json.length; i++) {
-			    	$('select[name=themeSelect]').append("<option value='"+json[i].matter+"''>"+json[i].title+"</option>");
-		    	}
-
-		    	//console.log(json);
-		    	$('select[name=themeSelect]').change(function(){
-	        		var _v = $('select[name=themeSelect]').find(':selected').val();
-		    		$('select[name=levelSlct]').attr('disabled','disabled').html("<option value=''>Nivel de Dificuldade</option>");
-		    		$('select[name=qAmount]').attr('disabled','disabled').html("<option value=''>Quantas perguntas você quer responder?</option>");
-		    		for (var i=0; i<json.length; i++) {
-						if(json[i].matter == $(this).val()){
-							var count = 2; // 0: Facil, 1: Médio e 2: Difícil
-							for (var y=0; y<=count; y++) {
-								if(json[i].questions[y].length > 0){
-									switch(y){
-										case 0:
-										_oTitle = "Fácil";
-										break;
-										case 1:
-										_oTitle = "Médio";
-										break;
-										case 2:
-										_oTitle = "Difícil";
-										break;
-									}
-									$('select[name=levelSlct]').removeAttr('disabled').append("<option value='"+y+"'>"+_oTitle+"</option>");
-								}
-							}
-						}
-		    		}
-		    		if( $('select[name=levelSlct] option').length > 2 ){
-						$('select[name=levelSlct]').append("<option value='3'>Aleatório</option>");
-					}
-		    	});
-		    	//
-		    	$('select[name=levelSlct]').change(function(){
-        			_level = $(this).val();
-		    		$('select[name=qAmount]').attr('disabled','disabled').html("<option value=''>Quantas perguntas você quer responder?</option>");
-		    		for (var i=0; i<json.length; i++) {
-						if(json[i].matter == $('select[name=themeSelect]').find(':selected').val()){
-							//console.log( json[i].questions[0] )
-							if($(this).val() != "" && $(this).val() != 3){
-			        			for(var _i = 0; _i < json[i].questions[$(this).val()].length; _i++){
-									oAnswers.push( json[i].questions[$(this).val()][_i] );
-			        			}
-				        		var _qntItensByLevel = json[i].questions[$(this).val()].length;
-							}else{
-				        		var _qntItensByLevel = 0;
-				        		for(var _q = 0; _q < Object.keys(json[i].questions).length; _q++){
-				        			for(var _i = 0; _i < json[i].questions[_q].length; _i++){
-										oAnswers.push( json[i].questions[_q][_i] );
-				        			}
-				        			_qntItensByLevel+=json[i].questions[_q].length;
-				        		}
-				        	}
-				        	// Calc Total itens and set the select[name=qAmount]'s options
-			        		$('select[name=qAmount]').html('<option value="">Quantas perguntas você quer responder?</option>');
-			        		if( eval(_qntItensByLevel / _maxCalcQuestions) < 1 ){
-				        		$('select[name=qAmount]').removeAttr('disabled').append('<option value="'+_qntItensByLevel+'">'+_qntItensByLevel+'</option>');
-			        		}else{
-			        			for(var i = 1; i <= eval(_qntItensByLevel / _maxCalcQuestions); i++ ){
-				        			$('select[name=qAmount]').removeAttr('disabled').append('<option value="'+(i*_maxCalcQuestions)+'">'+ (i*_maxCalcQuestions) +'</option>');
-			        			}
-			        			if( _qntItensByLevel % _maxCalcQuestions ){
-				        			$('select[name=qAmount]').removeAttr('disabled').append('<option value="'+_qntItensByLevel+'">'+_qntItensByLevel+'</option>');
-			        			}
-			        		}
-				        	//Random Questions
-				        	sortQuestions.splice(0,sortQuestions.length);
-				        	rndQuestions = function (_length){
-				        		return Math.floor((Math.random() * _length) + 1);
-				        	}
-				        	while (sortQuestions.length < _qntItensByLevel) {
-				        		_rq = rndQuestions( _qntItensByLevel );
-
-								if( sortQuestions.indexOf( _rq ) === -1 ){
-									sortQuestions.push(_rq);
-								}
-				        	}
-				        	console.log(sortQuestions);
-						}
-		    		}
-
-		    	})
-
+	        starting : function(){
+				
 				$('.puzzle .intro select').change(function(){
+        			_level = $('select[name=levelSlct]').find(':selected').val();
+        			_levelLabel = ( _level != '' ) ? $('select[name=levelSlct]').find(':selected').text() : 'Aleatório';
+					
+					$('select[name=levelSlct], select[name=themeSelect]').change(function(){
+	        			var _v = $('select[name=themeSelect]').find(':selected').val();
+						sqPuzzle.loadJson( _v, '' );
+					});
+
 					if( $('select[name=themeSelect]').find(':selected').val() != '' && $('select[name=qAmount]').find(':selected').val() != '' ){
 	        			
-	        			_t = $('select[name=themeSelect]').find(':selected').text(),
-	        			_l = $('select[name=levelSlct]').find(':selected').text(), 
+	        			_v = $('select[name=themeSelect]').find(':selected').val(), _t = $('select[name=themeSelect]').find(':selected').text();
 						_itens = $('select[name=qAmount]').val();
 
 						$('.btnBegin').prop('disabled',false).removeAttr("disabled").click(function(){
 							
 							sqPuzzle.boxConfirm(
-								"Teste: <strong>"+ _t +"</strong><br>Questões: <strong>"+ _itens +"</strong><br>Nível: <strong>"+ _l +"</strong> <br>Pronto pra começar?",
+								"Teste: <strong>"+ _t.toUpperCase() +"</strong><br>Questões: <strong>"+ _itens +"</strong><br>Nível: <strong>"+ _levelLabel +"</strong> <br>Pronto pra começar?",
 								"intro"
 							);
 
@@ -126,25 +48,93 @@ $(function(){
 	        			var _v = $('select[name=themeSelect]').find(':selected').val();
 						sqPuzzle.loadJson( _v, '' );
 					};*/
+
+
 				})
 
 	        },
 	        loadJson : function(theme, title) {
 				$.ajax({
-					url : 'js/educacaoFisica.js',
+					url : 'js/sqPuzzle.js',
 					dataType : 'json',	
 					success : function(json) { 
-						sqPuzzle.starting(json);
+						//console.log(theme);
+						switch(theme) {
+						    case 'historia':
+								sqPuzzle.getPuzzle( json.historia, title);
+						        break;
+						    case 'matematica':
+								sqPuzzle.getPuzzle( json.matematica, title);
+						        break;
+						    default:
+						        return;
+						}
 					},
 					error : function(r) { 
 						console.log('Deu Erro');
 					}
 				});
 	        },
-	        getPuzzle: function() {
+	        getPuzzle: function(data, t) {
+	        	var questions = data.questions;
+	        	
+	        	if(_level != "" && _level != 3){
+
+        			for(var _i = 0; _i < questions[_level].length; _i++){
+						oAnswers.push( questions[_level][_i] );
+        			}
+
+	        		var _qntItensByLevel = questions[_level].length;
+
+	        	}else{
+	        		var _qntItensByLevel = 0;
+	        		for(var _q = 0; _q < Object.keys(questions).length; _q++){
+	        			
+	        			for(var _i = 0; _i < questions[_q].length; _i++){
+							oAnswers.push( questions[_q][_i] );
+							//console.log( questions[_q][_i] );
+	        			}
+	        			_qntItensByLevel+=questions[_q].length;
+	        		}
+	        	}
+
+	        	// Calc Total itens and set the select[name=qAmount]'s options
+	        	if(t.length === 0){
+	        		$('select[name=qAmount]').html('<option value="">Quantas perguntas você quer responder?</option>');
+	        		if( eval(_qntItensByLevel / _maxCalcQuestions) < 1 ){
+		        		$('select[name=qAmount]').append('<option value="'+_qntItensByLevel+'">'+_qntItensByLevel+'</option>');
+	        		}else{
+	        			for(var i = 1; i <= eval(_qntItensByLevel / _maxCalcQuestions); i++ ){
+		        			$('select[name=qAmount]').append('<option value="'+(i*_maxCalcQuestions)+'">'+ (i*_maxCalcQuestions) +'</option>');
+	        			}
+	        			if( _qntItensByLevel % _maxCalcQuestions ){
+		        			$('select[name=qAmount]').append('<option value="'+_qntItensByLevel+'">'+_qntItensByLevel+'</option>');
+	        			}
+	        		}
+		        	return;
+	        	}
+
+	        	//Adjust _itens variable if Questions Amout to be Higher
+	        	/*if( _itens > _qntItensByLevel ){
+					_itens = _qntItensByLevel;
+	        	}*/
+
+	        	//Random Questions
+	        	var rndQuestions = function (_length){
+	        		return Math.floor((Math.random() * _length) + 1);
+	        	}
+	        	while (sortQuestions.length < _qntItensByLevel) {
+	        		_rq = rndQuestions( _qntItensByLevel );
+
+					if( sortQuestions.indexOf( _rq ) === -1 ){
+						sortQuestions.push(_rq);
+					}
+	        	}
+	        	console.log(sortQuestions);
+
 	        	loadQuestion = function(qIndex){
 
-		        	$('.puzzle .questions p.theme').html( 'Prova de <strong>'+_t+'</strong> <br>com <strong>' + _itens + ' questões</strong>.<br> Nível: <strong>'+ _l +'</strong>');
+		        	$('.puzzle .questions p.theme').html( 'Prova de <strong>'+t+'</strong> <br>com <strong>' + _itens + ' questões</strong>.<br> Nível: <strong>'+ _levelLabel +'</strong>');
 		        	$('.puzzle .questions p.steps').html( 'Você está na questão <strong>'+(qIndex+1)+'</strong> de <span>'+_itens+'</span>.' );
 		        	$('.puzzle .questions dl dt').html( (currQuestion+1) +') '+ oAnswers[ (sortQuestions[qIndex]-1) ][0] );
 					$('.puzzle .questions dl dd ul').html('');
@@ -211,7 +201,7 @@ $(function(){
 				$('.box._alert input.btnNo').show();
 				$('.box._alert input.btnYes').val('SIM');
 
-				$('.box._alert').show().removeClass('hide').addClass('show').find('div p').html(_dsc);
+				$('.box._alert').removeClass('hide').addClass('show').find('div p').html(_dsc);
 				
 				$('.box._alert input').unbind('click').click(function(){
 					
@@ -220,7 +210,7 @@ $(function(){
 						$('.box._alert').removeClass('show').addClass('hide');
 						
 						if( _id == "intro"){
-							sqPuzzle.getPuzzle();
+							sqPuzzle.loadJson( _v, _t );
 							$('.intro').fadeOut(500,function(){
 								$('.questions').fadeIn(500);
 							});
@@ -254,8 +244,6 @@ $(function(){
 								});
 							}
 						}
-
-						_reset = setTimeout(function(){ $('.box._alert').hide().removeClass('hide'); },1000);
 
 					}else{
 						$('.box._alert').removeClass('show');

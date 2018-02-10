@@ -1,25 +1,19 @@
 {
   "historia": {
-    "title" : "História",
-    "questions" : { 
-      "0" : [],
-      "1" : [],
-      "2" : [
-        [
-          [ "Como se define os Grupos Humanos que se formam as Aldeias?"], 
-          [ "População","Povoados","Bairros","Cidades"],
-          [ "1" ]
-        ],
-        [
-          [ "Quais dos grupos possuem representantes do governo?"], 
-          [ "Povoados e Cidades","Vilas e Povoados","Vilas e Cidades","Todos os grupos possuem representantes do governo"],
-          [ "2" ]
-        ]
+    "questions" : [ 
+      [
+        [ "Como se define os Grupos Humanos que se formam as Aldeias?"], 
+        [ "População","Povoados","Bairros","Cidades"],
+        [ "1" ]
+      ],
+      [
+        [ "Quais dos grupos possuem representantes do governo?"], 
+        [ "Povoados e Cidades","Vilas e Povoados","Vilas e Cidades","Todos os grupos possuem representantes do governo"],
+        [ "2" ]
       ]
-    }    
+    ]
   },
   "matematica": {
-    "title" : "Matemática",
     "questions" : {
       "0" : [
         [
@@ -123,5 +117,6 @@
         ] 
       ]
     }
+    
   }
 }

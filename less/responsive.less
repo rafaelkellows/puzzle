@@ -2,160 +2,37 @@
           RESPONSIVE
 *******************************/
 
-@media screen and (min-width: 320px) and (max-width: 1280px) {
-	body{
-		/*background: url('../images/Home-Live320.jpg') no-repeat left -20px #404444;*/
-		main{ 
-      padding-top: 3.5em; 
-      header{
-        padding: .438em 0 .438em .9em;
-        h1{
-          a{
-            img{ width: auto; height: 42px; }
-          }
+@media screen and (max-width: 480px) and (min-width: 320px){
+  body{ 
+    background-size: 110%; 
+    main{ 
+      padding: 0; 
+      .puzzle{ 
+        font-size: 1.6em; line-height: 1em; padding: 0.5em; 
+        .intro{
+          > br{ display: none; }
+          p img{ width: 70%; }
+          select{ width: 100%; display: block; font-size: .7em; margin: .5em auto; }
         }
-        nav{ 
-          margin: 0; padding: 0 0 0 .7em; box-sizing: border-box; width: calc(~'100% - 2.3em');
-          a{ 
-            &:not(.menu){
-              font-size: 1em; line-height: 1em; margin-right: 0.8em; letter-spacing: -0.01em;
-            }
-            font{ font-size: 17px; }
-          }
-          a.menu{ 
-          	/*margin-top: 8px;*/ width: 21px; 
-          	> span, &:before, &:after {
-          		margin: 1px 0; height: 4px;
-          	}
-
-          }
-          a.login{ margin-right: 0.8em; }
-          &.menu{
-            a{ 
-              margin-right: 0.8em; 
-              &.close{
-                width: 25px; height: 25px; line-height: 24px;
-              }
-            }
-            h2{
-              a{
-                margin: 1.2em 3.5em 1.2em 1.2em;
-                img{ height: 21px; }
+        .questions{
+          p.theme br{ display:block; }
+          p.steps{ font-size: 0.7em; }
+          dl{ 
+            padding: 0 .5em; 
+            dt{ font-size: 1.2em; padding: 0 0 25px;}
+            dd ul{ 
+              width: 100%; 
+              li{ 
+                label{ width: 85%; vertical-align: top; }
+                input[type=radio]{ display: inline-block; vertical-align: middle; }
               }
             }
           }
         }
-      }
-      section{
-        &.channels{
-        	background: none;
-          ul li{
-            width: 58px;
-            a{ 
-              padding: 10px 0 20px; margin-bottom: 7px;
-              span{ width: 25px; height: 25px; }
-            }
-          }
-          &.fixed{
-            top: 56px; background: #404444;
-          }
-        }
-        &.bets{
-          h4{ 
-            padding: 0.375em 0.532em;
-            span{
-              font-size: 1em;
-              font{ font-size: 1em; letter-spacing: -0.01em; }
-            }
-          }
-          article{
-            h5{ 
-              font-size: 1em;
-              &:before{
-                margin: 6px 3px 4px 9px; width: 18px; height: 25px;
-                background:url('../images/svgs/football-dgray.svg') no-repeat 0 0; background-size: contain;  
-              }
-            }
-            ul{
-              &.head {
-              	*{ font-size: initial; }
-              	p, ul li{ font-size: 0.84375em; }
-              }
-              &.head{
-                padding: 0.125em 0.375em; line-height: 1em;
-                ul li{ width: 33.3%;  }
-              }
-              &.body {
-                ul{
-                  &.l-colm{
-                    height: 65px; padding: .4em .3em .3em 0.6em; line-height: 1.15em; border-bottom: 1px solid #2c2f36;
-                    li{
-                      font-size: 1.0625em; letter-spacing: -0.01em;
-                      &:nth-child(1), &:nth-child(2){
-                        p{
-                          height: 1.05em;
-                        }
-                      }
-                      &.time{
-                        font-size: 0.84375em; 
-                        font{
-                          width: 6px;
-                        }
-                        &:before{
-                          width: .4em; height: .4em; border-radius: .4em; margin: 0 5px 0 -4px;
-                        }
-                      }
-                    }
-                  }
-                  &.r-colm li{
-                    font-size: 0.90625em; width: 33%; border-width: 1px;
-                    a{
-                      &:before{ 
-                        height:64px; 
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-          > nav{
-            margin-top: -32px; height: 32px; padding-left: 50px; line-height: 28px;
-            a{
-              font-size: 1em; margin-left: 8px;
-            }
-          }
-          &.fixed{
-            h4{ 
-              top: 118px;
-            }
-            > nav{ top: 150px; }
-          }
-          &.active h4{
-            &:after{
-              width: 1.7em;
-            }
-          }
-        }
-      }
-      &.fix_level2{
-        padding-top: 149px;   
-      }
-      .bets_msgs{
-        padding: 0.58em 0.907em;
-        *{
-          font-size: 18px; 
-        }
+        input[type=button]{ margin: .5em 0 0 0; font-size: 0.9em; }
+        input[type=number]{ margin: 0; width: 100%; box-sizing: border-box; padding: 0.1em 0.5em; }
       }
     }
-		main section.channels ul li a h3, main section.alive_bets > nav a, main section.alive_bets article ul.body ul.l-colm li{ font-size: 1em; }
-		.owl-carousel .owl-item img{ height: 99px; margin: 0 auto; }
-	  main section.alive_bets > nav{ line-height: 45px; }
+  }
+}
 
-	}
-}
-@media screen and (min-width: 641px) {
-	body{
-		font-size: 100%;
-	}
-}
