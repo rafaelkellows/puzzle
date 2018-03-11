@@ -69,6 +69,119 @@ select:disabled {
   background: #dddddd;
   cursor: default;
 }
+.btn {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 2px solid #fff;
+  text-align: center;
+  display: inline-block;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.btn i {
+  vertical-align: middle;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.btn:after {
+  content: '';
+  width: 0;
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+.btn:hover {
+  border-color: #006699;
+}
+.btn:hover i {
+  color: #006699;
+}
+.btn.save {
+  background-color: #4caf50;
+}
+.btn.save:hover {
+  border-color: #4caf50;
+  background: none !important;
+}
+.btn.save:hover i {
+  color: #4caf50;
+}
+.btn.forward,
+.btn.confirm,
+.btn.restart {
+  background-color: #4caf50;
+}
+.btn.forward:hover,
+.btn.confirm:hover,
+.btn.restart:hover {
+  border-color: #d8d6d0;
+  background: #1e273c !important;
+}
+.btn.forward:hover i,
+.btn.confirm:hover i,
+.btn.restart:hover i {
+  color: #fff;
+}
+.btn.restart {
+  margin: 0 auto;
+}
+.btn.upload {
+  display: block !important;
+  margin: 0 auto !important;
+}
+.btn.cancel {
+  background-color: #f44336;
+}
+.btn.cancel:hover {
+  border-color: #d8d6d0;
+  background: #1e273c !important;
+}
+.btn.cancel:hover i {
+  color: #fff;
+}
+.btn.play {
+  background-color: #d8d6d0;
+}
+.btn.play:hover {
+  border-color: #d8d6d0;
+  background: #1e273c !important;
+}
+.btn.play:hover i {
+  color: #fff;
+}
+.btn.home {
+  background-color: #2196f3;
+}
+.btn.home:hover {
+  border-color: #d8d6d0;
+  background: #1e273c !important;
+}
+.btn.home:hover i {
+  color: #fff;
+}
+.error {
+  color: #dc0000 !important;
+  text-shadow: none;
+}
+.success {
+  color: #00dc27 !important;
+  text-shadow: none;
+}
+.d-middle {
+  display: inline-block;
+  vertical-align: middle;
+}
+.d-top {
+  display: inline-block;
+  vertical-align: top;
+}
+.b-sizing {
+  box-sizing: border-box;
+}
 /*******************************
             MAIN
 *******************************/
@@ -88,7 +201,6 @@ body main {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
-  padding-top: 40px;
 }
 body main .puzzle {
   text-align: center;
@@ -99,11 +211,45 @@ body main .puzzle *:not(input),
 body main .puzzle *:not(select) {
   color: #fff;
 }
+body main .puzzle .profile {
+  padding: .25em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+  display: none;
+}
+body main .puzzle .profile p,
+body main .puzzle .profile > div {
+  width: 49%;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 0.8em;
+}
+body main .puzzle .profile p:last-child,
+body main .puzzle .profile > div:last-child {
+  text-align: right;
+}
+body main .puzzle .profile p div,
+body main .puzzle .profile > div div {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: -5px;
+}
+body main .puzzle .intro {
+  padding-top: 50px;
+}
 body main .puzzle .intro p img {
-  margin: 15px auto 0;
+  margin: 0 auto;
+}
+body main .puzzle .intro select {
+  /*display: none;*/
 }
 body main .puzzle .questions {
   display: none;
+  padding-top: 40px;
 }
 body main .puzzle .questions p.theme br {
   display: none;
@@ -112,6 +258,10 @@ body main .puzzle .questions dl dt {
   font-size: 2em;
   padding: 0 0.8em 25px;
   line-height: 1em;
+  text-align: center;
+}
+body main .puzzle .questions dl dt img {
+  margin: 0.5em auto 0;
 }
 body main .puzzle .questions dl dd ul {
   width: 75%;
@@ -121,16 +271,20 @@ body main .puzzle .questions dl dd ul li {
   text-align: left;
   margin: .5em 0;
 }
-body main .puzzle .questions dl dd ul li:hover {
+body main .puzzle .questions dl dd ul li.active {
   color: #eec413;
 }
-body main .puzzle .questions dl dd ul li:hover *:not(input) {
+body main .puzzle .questions dl dd ul li.active *:not(input) {
   color: #eec413;
 }
 body main .puzzle .questions dl dd ul li label {
   cursor: pointer;
   display: inline-block;
+  vertical-align: top;
   width: 90%;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
 }
 body main .puzzle .box {
   position: fixed;
@@ -178,10 +332,89 @@ body main .puzzle .box > strong {
 body main .puzzle .box > div {
   display: inline-block;
   vertical-align: middle;
+  width: 90%;
 }
 body main .puzzle .box > div p {
   padding: .8em;
   text-shadow: 1px 1px 1px #342a5c;
+}
+body main .puzzle .box > div p em {
+  font-size: .8em;
+}
+body main .puzzle .box > div > ul {
+  padding-bottom: 1em;
+}
+body main .puzzle .box > div > ul li {
+  background-color: #ff6600;
+  width: 150px;
+  height: 150px;
+  border-radius: 150px;
+  display: inline-block;
+  vertical-align: top;
+  margin: .25em;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+body main .puzzle .box > div > ul li a {
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}
+body main .puzzle .box > div > ul li a:before {
+  content: '';
+  width: 0;
+  height: 100%;
+  display: inline-block;
+  vertical-align: middle;
+}
+body main .puzzle .box > div > ul li a span {
+  font-weight: normal;
+  line-height: 1.1em;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 0.7em;
+  padding: 0.8em;
+  opacity: 1;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+body main .puzzle .box > div > ul li a img {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  opacity: 0;
+  -webkit-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+  transition: opacity 0.5s;
+}
+body main .puzzle .box > div > ul li.active {
+  background-color: #1e273c;
+}
+body main .puzzle .box > div > ul li.active span {
+  opacity: 0;
+}
+body main .puzzle .box > div > ul li.active img {
+  opacity: 1;
+}
+body main .puzzle .box > div > ul:not(.matter) li a span {
+  font-size: 1.1em;
+  padding: 0.8em 0;
+}
+body main .puzzle .box > div > ul:not(.matter) li.active {
+  background-color: #1e273c;
+}
+body main .puzzle .box > div > ul:not(.matter) li.active span {
+  opacity: 1;
+  font-size: 1.3em;
+}
+body main .puzzle .box > div > ul:not(.matter) li.active img {
+  opacity: 1;
 }
 body main .puzzle .box > div input {
   min-width: 80px;
@@ -193,15 +426,30 @@ body main .puzzle .box.hide {
   left: -100%;
   display: block;
 }
+body main .puzzle input[type=text],
+body main .puzzle input[type=file],
+body main .puzzle input[type=number],
+body main .puzzle input[type=password],
+body main .puzzle textarea {
+  color: #1e273c;
+  padding: .1em .5em;
+  border-radius: 6px;
+  text-align: center;
+  background-color: #f3f3cb;
+  box-sizing: border-box;
+}
 body main .puzzle input[type=button] {
   color: #fff;
-  padding: .2em .5em;
+  padding: .1em .5em;
   margin: 0 .5em;
   cursor: pointer;
   background-color: #342a5c;
   border: 1px solid #d8d6d0;
   border-radius: 6px;
   box-sizing: border-box;
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
 }
 body main .puzzle input[type=button].btnBegin,
 body main .puzzle input[type=button].btnYes,
@@ -236,6 +484,116 @@ body main .puzzle option {
   padding: 0.165em .5em;
   border: 0;
   font-size: .9em;
+  border-radius: 6px;
+  background-color: #f3f3cb;
+}
+body main .login {
+  padding-bottom: 2em;
+}
+body main .login .intro p img {
+  width: 150px;
+}
+body main .login label {
+  display: block;
+  padding: .3em 0;
+}
+body main .login .btn {
+  margin: .3em;
+}
+body main .login nav.list {
+  padding: 1em;
+}
+body main .login nav.list ul {
+  text-align: left;
+}
+body main .login nav.list ul li {
+  cursor: pointer;
+}
+body main .login nav.list ul li img {
+  width: 25px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: .5em;
+}
+body main .login nav.list ul li a {
+  display: inline-block;
+  vertical-align: middle;
+  width: 85%;
+}
+body main .login nav.list ul:first-child > li {
+  border-bottom: 1px solid #fff;
+  margin: .15em 0 .3em;
+  padding-bottom: .15em;
+}
+body main .login nav.list ul > ul {
+  padding: 0 1em;
+}
+body main .login nav.list ul > ul li {
+  font-size: .8em;
+}
+body main .login nav.list ul > ul li img {
+  width: auto;
+  margin: .5em auto 0;
+  display: block;
+}
+body main .login nav.list ul > ul > ul {
+  padding: 0 0 0.5em;
+}
+body main .login nav.list ul > ul > ul > li {
+  background-color: cornflowerblue;
+  padding: 0 .3em;
+  border-bottom: 2px solid #1e273c;
+}
+body main .login nav.list ul > ul > ul > ul {
+  border: 1px solid cornflowerblue;
+  padding: 0.3em 0.6em;
+}
+body main .login nav.list ul > ul > ul > ul li {
+  background: none !important;
+  padding: 0;
+}
+body main .login nav.list ul > ul > ul nav {
+  text-align: center;
+}
+body main .login nav.list ul > ul > ul nav a {
+  display: inline-block;
+  vertical-align: middle;
+}
+body main .login nav.list ul > ul {
+  padding-bottom: .5em;
+}
+body main .login.edit label {
+  border-top: 1px solid #fff;
+  margin-top: 1em;
+}
+body main .login.edit label em {
+  font-size: .8em;
+}
+body main .login.edit .file figure {
+  width: 200px;
+  margin: .5em auto;
+  background-color: #fff;
+  padding: .5em;
+}
+body main .login.edit .file figure img {
+  width: 100%;
+}
+body main .login.edit .file figure figcaption {
+  font-size: .75em;
+  color: #bfb9b1;
+}
+body main .edit textarea {
+  width: 80%;
+  box-sizing: border-box;
+  margin: 0;
+}
+body main .edit input[type=text] {
+  width: 80%;
+  box-sizing: border-box;
+}
+body main .edit .btn {
+  display: inline-block;
+  vertical-align: middle;
 }
 /*******************************
           RESPONSIVE
@@ -252,17 +610,14 @@ body main .puzzle option {
     line-height: 1em;
     padding: 0.5em;
   }
-  body main .puzzle .intro > br {
-    display: none;
-  }
   body main .puzzle .intro p img {
-    width: 70%;
+    width: 50%;
   }
-  body main .puzzle .intro select {
+  body main .puzzle .intro select,
+  body main .puzzle .intro textarea,
+  body main .puzzle .intro input[type=text],
+  body main .puzzle .intro input[type=password] {
     width: 100%;
-    display: block;
-    font-size: .7em;
-    margin: .5em auto;
   }
   body main .puzzle .questions p.theme br {
     display: block;
@@ -297,6 +652,25 @@ body main .puzzle option {
     width: 100%;
     box-sizing: border-box;
     padding: 0.1em 0.5em;
+  }
+  body main .puzzle .box > div p {
+    padding: .8em 0;
+  }
+  body main .puzzle .box > div p input[type=text],
+  body main .puzzle .box > div p input[type=password] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  body main .puzzle .box > div > ul li {
+    width: 100px;
+    height: 100px;
+    font-size: 0.8em;
+  }
+  body main .login nav.list {
+    padding: .3em 0;
+  }
+  body main .login nav.list ul > ul {
+    padding: 0 .5em;
   }
 }
 /*@import "components.less";

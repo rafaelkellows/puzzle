@@ -64,10 +64,10 @@ module.exports = function(grunt) {
 
     //Usemin Task
     useminPrepare:{
-      html:['dist/**.html']
+      html:['dist/**.html','dist/**.php',]
     },
     usemin:{
-      html:['dist/**.html']
+      html:['dist/**.html','dist/**.php']
     },
 
     cssmin: {

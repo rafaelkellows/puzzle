@@ -10,9 +10,8 @@
       .puzzle{ 
         font-size: 1.6em; line-height: 1em; padding: 0.5em; 
         .intro{
-          > br{ display: none; }
-          p img{ width: 70%; }
-          select{ width: 100%; display: block; font-size: .7em; margin: .5em auto; }
+          p img{ width: 50%; }
+          select, textarea, input[type=text], input[type=password]{ width: 100%; }
         }
         .questions{
           p.theme br{ display:block; }
@@ -31,6 +30,21 @@
         }
         input[type=button]{ margin: .5em 0 0 0; font-size: 0.9em; }
         input[type=number]{ margin: 0; width: 100%; box-sizing: border-box; padding: 0.1em 0.5em; }
+        .box > div {
+          p{ 
+            padding:.8em 0;
+            input[type=text], input[type=password]{
+              width: 100%; .b-sizing;
+            }
+          }
+          > ul li{
+            width: 100px; height: 100px; font-size: 0.8em;
+          }
+        }
+      }
+      .login nav.list{
+        padding:.3em 0;
+        ul > ul { padding:0 .5em;  }
       }
     }
   }

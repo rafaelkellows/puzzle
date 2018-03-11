@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <title>Coleção Eu gosto m@is - Editora IBEP - 2ª Edição 2012 - Ensino Fundamental - Testes</title>
+  <title>School Tests Puzzle by Rafael Kellows</title>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="description" content="">
     <meta name="author" content="Rafael Kellows - rafaelkellows@hotmail.com">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    
+    <link href="css/font-awesome/font-awesome.min.css" rel="stylesheet" media="screen">
     <link href="css/personal/stylesheet.css" rel="stylesheet" media="screen">
 
     <!-- Owl Carousel Assets -->
@@ -33,42 +35,48 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
+
+    <link rel="shortcut icon" href="images/icons/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/icons/favicon.ico" type="image/x-icon">
+
     <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="js/addtohomescreen.js"></script>
 
   </head>
   <body>
   <script>
-    addToHomescreen();
+    addToHomescreen('http://www.spatula.com/pz3/');
   </script>    
     <main>
-      <form class="puzzle">
+      <form class="puzzle" action="syslogin/controle.php" method="post" target="_self">
+        <input type="hidden" name="formType" value="login">
+        <input type="hidden" name="step" value="0" />
+
         <div class="box _alert">
           <strong>Atenção!</strong>
           <div>
             <p>Você tem certeza da sua resposta?</p>
-            <input type="button" class="btnNo" value="NÃO"> <input class="btnYes" type="button" value="SIM">
+            <input type="button" class="btnNo hide" value="NÃO"> <input class="btnYes hide" type="button" value="SIM">
+            <a class="btn cancel" href="javascript:void(0);" value="NÃO"><i class="fa fa-times"></i></a>
+            <a class="btn forward" href="javascript:void(0);" value="SIM"><i class="fa fa-forward"></i></a>
+          </div>
+        </div>
+
+        <div class="profile">
+          <p>Olá, <strong>Usuário.</strong></p>
+          <div id="contenedor">
+            <div><strong>Tempo:&nbsp;</strong></div>
+            <div class="reloj" id="Horas">00</div>
+            <div class="reloj" id="Minutos">:00</div>
+            <div class="reloj" id="Segundos">:00</div>
+            <div class="reloj" id="Centesimas">:00</div>
           </div>
         </div>
         <div class="intro">
-          <p style="font-size: .7em; font-weight: bold">Perguntas baseadas na Coleção <br><img src="images/imagemColecao.png" /><br>Editora IBEP - 2ª Edição 2012<br>3º ano - Ensino Fundamental</p>
-          <p>Defina nos campos abaixo seu teste e clique em COMEÇAR.<br><strong>Boa Sorte</strong>!</p><br>
-          <select name="themeSelect">
-            <option value="">Qual matéria você vai estudar?</option>
-            <option value="historia">História</option>
-            <option value="matematica">Matemática</option>
-          </select>
-          <select name="levelSlct">
-            <option value="">Nivel de Dificuldade</option>
-            <option value="0">Fácil</option>
-            <option value="1">Médio</option>
-            <option value="2">Difícil</option>
-            <option value="3">Aleatório</option>
-          </select>
-          <select name="qAmount">
-            <option value="">Quantas perguntas você quer responder?</option>
-          </select>
-          <input type="button" disabled="disabled" class="btnBegin" value="COMEÇAR">
+          <p style="font-size: .7em; font-weight: bold"><img src="images/icons/puzzleIcon.png" /><br><!--Perguntas baseadas na Coleção Eu gosto m@ais<br>Editora IBEP - 2ª Edição 2012<br>3º ano - Ensino Fundamental--></p>
+          <p>Olá, eu sou o <em>Profº Cloud</em>. <br>Clique em <i class="fa fa-sign-in"></i> para iniciar o seu teste ou<br> em <i class="fa fa-lock"></i> para acessar a area restrita.</p><br>
+          <a class="btn" href="javascript:void(0);" value="BEGIN"><i class="fa fa-sign-in"></i></a>
+          <a class="btn" href="login.php" value="ACESSO RESTRITO"><i class="fa fa-lock"></i></a>
         </div>
         <div class="questions">
           <p class="theme"><!-- Passos --></p>
@@ -81,7 +89,10 @@
                 <!-- Respostas -->
               </ul>
           </dl>
-          <input type="button" class="btnCancel" value="CANCELAR"> <input class="btnConfirm" type="button" value="CONFIRMAR"> <input class="btnRestart" type="button" value="FAZER O TESTE DE NOVO">
+          <a class="btn cancel btnCancel" href="javascript:void(0);" value="CANCELAR"><i class="fa fa-times"></i></a>
+          <a class="btn confirm btnConfirm" href="javascript:void(0);" value="CONFIRMAR"><i class="fa fa-check"></i></a>
+          <a class="btn restart btnRestart" href="javascript:void(0);" value="FAZER O TESTE DE NOVO"><i class="fa fa-reply"></i></a>
+          <!--input type="button" class="btnCancel" value="CANCELAR"> <input class="btnConfirm" type="button" value="CONFIRMAR"> <input class="btnRestart" type="button" value="FAZER O TESTE DE NOVO"-->
         </div>
       </form>
 
