@@ -32,7 +32,7 @@ class AutenticadorEmBanco extends AutenticadorPuzzle {
  
     public function expulsar($d) {
       $_d = (isset($d) && !empty($d))?'?d='.$d:'';      
-      header('location: login.php'.$_d);
+      header('location: ../index.php'.$_d);
     }
  
     public function logar($email, $password) {

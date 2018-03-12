@@ -3,7 +3,7 @@ $(function(){
 	    var sortQuestions = [], sortAnswers = [], answers = [], oAnswers = [], oMatters = [];
     	var _itens = 0, _level = '', _levelLabel = '', _maxCalcQuestions = 3; //questions amount limit set on "starting" obj;
 		var _v,_t,_l,_amount,loadQuestion,rndQuestions,json,control;
-    	var currQuestion = 0; currAnswer = null;
+    	var currQuestion = 0; currAnswer = null,logged = false;
 		var validateEmail = function(email){
 		  var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		  return re.test(email);
@@ -18,24 +18,37 @@ $(function(){
 	        	this.loading();
 	        	//this.starting();
 	        	//this.loadJson();
+	        	isLoged = $('form input[name=usrlogged]').val();
+	        	if(eval(isLoged)) {
+	        		logged=true;
+	        	}else{
+	        		logged=false;
+	        	}
 	        	this.setUser();
 	        },
 	        clearForm : function(){
 				$('form input[name=email]').remove();
 				$('form input[name=password]').remove();
 				userEmail = null;
-				userPswd = null;
 	        },
 	        setUser : function(msg){
 				$('.box._alert .btn.forward').attr('value','SIM').find('i').removeAttr('class').addClass('fa fa-forward');
 				sqPuzzle.clearForm();
 				$('.btn[value=BEGIN]').click(function(){
-					if(userEmail&&userPswd){return;}
 		        	$('.box._alert .btn').removeClass('hide').show();
 					$('.box._alert').removeClass('hide').addClass('show');
+					if(logged){
+						if( !$('body main .puzzle .box > div').hasClass('step') ){
+			        		$('.box._alert .btn').addClass('hide').hide();
+			        		sqPuzzle.loadJson($('body main .puzzle .profile p strong').text());
+		        		}
+						//$('.box._alert div p').html('Olá, <strong>'+$('body main .puzzle .profile p strong').text()+'</strong>.<br>O sistema está carregando a base de dados.<br> Aguarde um pouco!');
+						return;
+					}
 					sqPuzzle.boxConfirm(
 						"Diga seu e-mail:<br><em class='hide'>"+( (msg) ? msg :"verifique a informação novamente"  )+"<br></em><input maxlength='40' type='text' name='email'>", "profile"
 					);
+					$('.box._alert input[name=email]').focus()
 				});
 	        },
 	        loading : function(){
@@ -56,7 +69,9 @@ $(function(){
 						sqPuzzle.starting();
 					},
 					error : function(r) { 
-					    $('.box._alert .btn.forward').show().attr('value','').find('i').removeAttr('class').addClass('fa fa-check');
+					    $('.box._alert .btn.forward').click(function(){
+					    	location.reload();
+					    }).show().attr('value','').find('i').removeAttr('class').addClass('fa fa-check');
 						$('.box._alert div p').html('Aconteceu algum erro ao conectar com o banco. Tente novamente.');
 					},
 					beforeSend: function(r) { 
@@ -144,7 +159,7 @@ $(function(){
 	        usrConfigPuzzle : function(step){
 				$('.box._alert').removeClass('hide').addClass('show');
 				$('.box._alert .btn').show();
-				$('.box._alert .btn.cancel').hide();
+				//$('.box._alert .btn.cancel').hide();
 				
 				switch(step){
 					case 0: //Setting Matter(s)
@@ -156,6 +171,7 @@ $(function(){
 				    	}
 			        	_ul += '</ul>';
 						sqPuzzle.boxConfirm( "Escolha abaixo as matérias do teste.", "materias", _ul);
+						$('body main .puzzle .box > div').addClass('step');
 						$('body main .puzzle .box > div > ul li').click(function(){
 							$(this).toggleClass('active');
 						})
@@ -379,6 +395,7 @@ $(function(){
 									sqPuzzle.boxConfirm(
 										"Digite sua senha:<br><em class='hide'>verifique a informação novamente<br></em><input maxlength='40' type='password' name='password'>", "profile"
 									);
+									$('.box._alert input[name=password]').focus();
 								}else{
 									$('.box._alert input[name=email]').addClass('error').focus().prev('em').html('verifique a informação novamente<br>').removeClass('hide').addClass('error show');
 									return;
@@ -528,13 +545,15 @@ $(function(){
 					    	if(response!='error' && response.length < 20){
 					    		$('body main .puzzle .profile').show().find('p strong').html(response);
 					    		sqPuzzle.loadJson(response);
+					    		logged=true;
 					    	}else{
+					    		logged=false;
 					    		$('.box._alert .btn.cancel').addClass('hide');
 					    		$('.box._alert .btn.forward').attr('value','').find('i').removeAttr('class').addClass('fa fa-check');
 					    		$('.box._alert .btn.forward').show().click(function(){
 						    		sqPuzzle.setUser();
 					    		});
-					    		console.log(response);
+					    		
 					    		if(response=='error'){
 					    			$('.box._alert div p').html('Usuário e/ou Senha inválido. Tente novamente.');
 					    		}else{
@@ -543,6 +562,7 @@ $(function(){
 					    	}
 						},
 						error : function(r) { 
+							logged=false;
 					    	$('body main .puzzle .profile').show().find('p').html('Aconteceu algum erro ao conectar com o banco. Tente novamente.');
 						}
 					});

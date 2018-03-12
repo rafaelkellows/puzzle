@@ -1,3 +1,19 @@
+<?php 
+  require_once 'syslogin/usuario.php';
+  require_once 'syslogin/autenticador.php'; 
+  require_once 'syslogin/sessao.php';
+  require_once 'connector.php'; 
+   
+  $aut = AutenticadorPuzzle::instanciar();
+   
+  $usuario = null;
+  if ($aut->esta_logado()) {
+    $usuario = $aut->pegar_usuario();
+  }else{
+    $usuario = '';
+
+  }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <title>School Tests Puzzle by Rafael Kellows</title>
@@ -45,12 +61,11 @@
   </head>
   <body>
   <script>
-    addToHomescreen('http://www.spatula.com/pz3/');
+    addToHomescreen('http://www.spatula.com/pz/');
   </script>    
     <main>
       <form class="puzzle" action="syslogin/controle.php" method="post" target="_self">
         <input type="hidden" name="formType" value="login">
-        <input type="hidden" name="step" value="0" />
 
         <div class="box _alert">
           <strong>Atenção!</strong>
@@ -62,8 +77,19 @@
           </div>
         </div>
 
-        <div class="profile">
-          <p>Olá, <strong>Usuário.</strong></p>
+        <?php 
+          $class = '';
+          $usrName = '';
+          $usrlogged = 0;
+          if( !empty($usuario) ){
+            $class = " style='display:block;'";
+            $usrName = $usuario->getName();
+            $usrlogged = 1;
+          }
+        ?>
+        <input type="hidden" name="usrlogged" value="<?php echo $usrlogged; ?>" />
+        <div class="profile" <?php echo $class; ?>>
+          <p>Olá, <strong><?php echo $usrName; ?></strong>. <a href="syslogin/logout.php"><i class="fa fa-sign-out"></i></a></p>
           <div id="contenedor">
             <div><strong>Tempo:&nbsp;</strong></div>
             <div class="reloj" id="Horas">00</div>
@@ -75,7 +101,14 @@
         <div class="intro">
           <p style="font-size: .7em; font-weight: bold"><img src="images/icons/puzzleIcon.png" /><br><!--Perguntas baseadas na Coleção Eu gosto m@ais<br>Editora IBEP - 2ª Edição 2012<br>3º ano - Ensino Fundamental--></p>
           <p>Olá, eu sou o <em>Profº Cloud</em>. <br>Clique em <i class="fa fa-sign-in"></i> para iniciar o seu teste ou<br> em <i class="fa fa-lock"></i> para acessar a area restrita.</p><br>
-          <a class="btn" href="javascript:void(0);" value="BEGIN"><i class="fa fa-sign-in"></i></a>
+          <?php
+            if( !empty($usuario) ){
+              $faIcon = 'fa-gamepad';
+            }else{
+              $faIcon = 'fa-sign-in';
+            }
+          ?>
+          <a class="btn" href="javascript:void(0);" value="BEGIN"><i class="fa <?php echo $faIcon; ?>"></i></a>
           <a class="btn" href="login.php" value="ACESSO RESTRITO"><i class="fa fa-lock"></i></a>
         </div>
         <div class="questions">
@@ -89,9 +122,11 @@
                 <!-- Respostas -->
               </ul>
           </dl>
-          <a class="btn cancel btnCancel" href="javascript:void(0);" value="CANCELAR"><i class="fa fa-times"></i></a>
-          <a class="btn confirm btnConfirm" href="javascript:void(0);" value="CONFIRMAR"><i class="fa fa-check"></i></a>
-          <a class="btn restart btnRestart" href="javascript:void(0);" value="FAZER O TESTE DE NOVO"><i class="fa fa-reply"></i></a>
+          <nav class="qActions">
+            <a class="btn cancel btnCancel" href="javascript:void(0);" value="CANCELAR"><i class="fa fa-times"></i></a>
+            <a class="btn confirm btnConfirm" href="javascript:void(0);" value="CONFIRMAR"><i class="fa fa-check"></i></a>
+            <a class="btn restart btnRestart" href="javascript:void(0);" value="FAZER O TESTE DE NOVO"><i class="fa fa-reply"></i></a>
+          </nav>
           <!--input type="button" class="btnCancel" value="CANCELAR"> <input class="btnConfirm" type="button" value="CONFIRMAR"> <input class="btnRestart" type="button" value="FAZER O TESTE DE NOVO"-->
         </div>
       </form>

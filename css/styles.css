@@ -212,17 +212,19 @@ body main .puzzle *:not(select) {
   color: #fff;
 }
 body main .puzzle .profile {
-  padding: .25em;
+  /*padding: .25em; */
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   box-sizing: border-box;
   display: none;
+  background-color: #3F51B5;
+  z-index: 1;
 }
 body main .puzzle .profile p,
 body main .puzzle .profile > div {
-  width: 49%;
+  width: 47%;
   display: inline-block;
   vertical-align: middle;
   text-align: left;
@@ -231,12 +233,17 @@ body main .puzzle .profile > div {
 body main .puzzle .profile p:last-child,
 body main .puzzle .profile > div:last-child {
   text-align: right;
+  padding-right: 0.25em;
 }
 body main .puzzle .profile p div,
 body main .puzzle .profile > div div {
   display: inline-block;
   vertical-align: middle;
   margin-right: -5px;
+}
+body main .puzzle .profile p a {
+  display: inline-block;
+  vertical-align: middle;
 }
 body main .puzzle .intro {
   padding-top: 50px;
@@ -249,7 +256,7 @@ body main .puzzle .intro select {
 }
 body main .puzzle .questions {
   display: none;
-  padding-top: 40px;
+  padding: 40px 0;
 }
 body main .puzzle .questions p.theme br {
   display: none;
@@ -285,6 +292,14 @@ body main .puzzle .questions dl dd ul li label {
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s;
+}
+body main .puzzle .questions nav.qActions {
+  background-color: #3F51B5;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  left: 0;
+  padding: .5em 0;
 }
 body main .puzzle .box {
   position: fixed;
@@ -626,11 +641,12 @@ body main .edit .btn {
     font-size: 0.7em;
   }
   body main .puzzle .questions dl {
-    padding: 0 .5em;
+    padding: .5em;
   }
   body main .puzzle .questions dl dt {
     font-size: 1.2em;
-    padding: 0 0 25px;
+    padding: 0 0 10px;
+    color: #8eee13;
   }
   body main .puzzle .questions dl dd ul {
     width: 100%;

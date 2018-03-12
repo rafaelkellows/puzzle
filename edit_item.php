@@ -117,10 +117,15 @@
               echo "<textarea name='question'>".$rowQ["question"]."</textarea>";
               if( !empty($rowQ["img_src"]) ){
                 echo "<div class='file'>";
-                echo "  <label>Arquivo</label>";
+                echo "  <label>Arquivo<br><em>Selecione um arquivo de até 100MB.</em></label>";
                 echo "  <input type='file' name='file' id='file' class='hide' />";
                 echo "  <input type='hidden' name='filePath' value='".$rowQ["img_src"]."' />";
-
+                if( $rowQ["img_title"] !='' ) { 
+                  $img_title = str_replace("'","´",$rowQ["img_title"]);
+                }else{ 
+                  $img_title = '';
+                }
+                echo "  <input type='text' name='figlabel' placeholder='Difina a fonte a imagem' value='".$img_title."'' />";
                 echo "  <figure>";
                 echo "    <img id='previewing' src='".$rowQ["img_src"]."' />";
                 echo "    <figcaption></figcaption>";
@@ -129,9 +134,10 @@
                 echo "</div>";
               }else{
                 echo "<div class='file'>";
-                echo "  <label>Arquivo</label>";
+                echo "  <label>Arquivo<br><em>Selecione um arquivo de até 100MB.</em></label>";
                 echo "  <input type='file' name='file' id='file' class='hide' />";
                 echo "  <input type='hidden' name='filePath' value='' />";
+                echo "  <input type='text' name='figlabel' placeholder='Difina a fonte a imagem' value='' />";
                 echo "  <figure>";
                 echo "    <img id='previewing' src='images/icons/puzzleIcon.png' />";
                 echo "    <figcaption>sem imagem</figcaption>";

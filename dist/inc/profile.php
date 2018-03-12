@@ -1,5 +1,5 @@
         <div class="profile" style="display: block;">
-          <p>Olá, <strong><?php print $usuario->getName(); ?>.</strong></p>
+          <p>Olá, <strong><?php print $usuario->getName(); ?></strong>.</p>
           <div id="contenedor">
             <div><strong>Último acesso em </strong><?php print $usuario->getVisited(); ?></div>
           </div>

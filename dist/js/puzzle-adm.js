@@ -107,14 +107,55 @@ $(function(){
 	        		if($(this).hasClass('upload')){
 		        		$(this).click(function(e){
 		        			e.preventDefault();
-		        			console.log('casd');
 		        			$('input[type=file]').click().change(function(){
-								
-		        				
+							   if (window.File && window.FileReader && window.FileList && window.Blob){
+									
+									if( !$('#file').val() ){
+										sqPuzzleAdm.boxConfirm(
+											"Você precisa definir a imagem", "affirmative",'', q
+										);
+										return false;
+									}
+									
+									var fsize = $('#file')[0].files[0].size; //get file size
+									var ftype = $('#file')[0].files[0].type; // get file type
+									
+									console.log(fsize);
+									//allow file types 
+									switch(ftype){
+										case 'image/jpg': 
+							                break;
+										case 'image/jpeg': 
+							                break;
+										case 'image/png': 
+							                break;
+										case 'image/gif': 
+							                break;
+							            default:
+											sqPuzzleAdm.boxConfirm(
+												"Tipo de arquivo não suportado.<br>Selecione arquivos com a extensão .jpg/.jpeg, .png ou .gif", "affirmative",''
+											);
+											return false;
+							        }
+									
+									//Allowed file size is less than ... |  1 MB = (1048576)
+									if(fsize>104857){
+										sqPuzzleAdm.boxConfirm(
+											"O arquivo selecionado ultrapassa o tamanho permitido.<br>Selecione um arquivo de até 100MB.", "affirmative",''
+										);
+										return false;
+									}
+								}
+								else{
+									sqPuzzleAdm.boxConfirm(
+										"Seu navegador não dá suporte para carregar a imagem. Utilize outro navegador.", "affirmative",''
+									);
+									return false;
+								}
+
 								sqPuzzleAdm.boxConfirm(
 									"...aguarde...", "loading"
 								);
-								
 								$form
 									.attr("enctype","multipart/form-data").attr('action','ajax_php_file.php')
 									.on('submit',(function(e) {

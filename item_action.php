@@ -5,6 +5,7 @@
     $level = $_REQUEST["level"];
     $question = $_REQUEST["question"];
     $ilustration = $_REQUEST["filePath"];
+    $ilustraLabel =  str_replace("'","´",$_REQUEST["figlabel"]);
     $answers = ( !empty($_REQUEST["answer"][0]) ) ? $_REQUEST["answer"] : 0 ;
     $answersID = ( $answers ) ? $_REQUEST["answerID"] : 0 ;
     $correctans = $_REQUEST["correctans"];
@@ -17,7 +18,7 @@
       case "new_item":
         
         if( !empty($txtcorrectans) ){
-          $sqlInsert = $oConn->SQLinserter("tbl_questions", "id_matter,level,question,img_src,answer,status,inserted,modified", "'$matter','$level','$question','$ilustration','$txtcorrectans','$status',now(),now()");
+          $sqlInsert = $oConn->SQLinserter("tbl_questions", "id_matter,level,question,img_src,img_title,answer,status,inserted,modified", "'$matter','$level','$question','$ilustration','$ilustraLabel','$txtcorrectans','$status',now(),now()");
           if($sqlInsert){
             header('location: list.php?msg=1');
           }
@@ -27,7 +28,7 @@
           return;
         }
 
-        $sqlInsert = $oConn->SQLinserter("tbl_questions", "id_matter,level,question,img_src,answer,status,inserted,modified", "'$matter','$level','$question','$ilustration','$correctans','$status',now(),now()");
+        $sqlInsert = $oConn->SQLinserter("tbl_questions", "id_matter,level,question,img_src,img_title,answer,status,inserted,modified", "'$matter','$level','$question','$ilustration','$ilustraLabel','$correctans','$status',now(),now()");
         if($sqlInsert){
           //Get last id inserted
           $sqlSct = $oConn->SQLselector("*","tbl_questions","","id DESC");
@@ -69,9 +70,9 @@
         }
 
         if( !empty($txtcorrectans) ){
-          $sqlUpdate = $oConn->SQLupdater("tbl_questions","modified = now(),id_matter='$matter',level='$level',question='$question',img_src='$ilustration',answer='$txtcorrectans',status='$status'","id='".$qID."'");
+          $sqlUpdate = $oConn->SQLupdater("tbl_questions","modified = now(),id_matter='$matter',level='$level',question='$question',img_src='$ilustration',img_title='$ilustraLabel',answer='$txtcorrectans',status='$status'","id='".$qID."'");
         }else{
-          $sqlUpdate = $oConn->SQLupdater("tbl_questions","modified = now(),id_matter='$matter',level='$level',question='$question',img_src='$ilustration',answer='$correctans',status='$status'","id='".$qID."'");
+          $sqlUpdate = $oConn->SQLupdater("tbl_questions","modified = now(),id_matter='$matter',level='$level',question='$question',img_src='$ilustration',img_title='$ilustraLabel',answer='$correctans',status='$status'","id='".$qID."'");
         }
         //$row = $sqlUpdate->fetch(PDO::FETCH_ASSOC);
 

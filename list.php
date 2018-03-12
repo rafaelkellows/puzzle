@@ -129,7 +129,7 @@
                               echo "<ul class='hide'>";
                               $answerCount = 0;
                               if( !empty($rowO["img_src"]) ){
-                                echo "<li><img src='".$rowO['img_src']."' /></li>";
+                                echo "<li>Fonte da imagem: '".$rowO['img_title']."'<img src='".$rowO['img_src']."' /></li>";
                               }
                               while ( $rowA = $oSlctAnswers->fetch(PDO::FETCH_ASSOC) ) {
                                 $answerCount++;
@@ -142,7 +142,7 @@
                               echo "<ul class='hide'>";
                               echo "  <li>";
                               if( !empty($rowO["img_src"]) ){
-                                echo "  <img src='".$rowO['img_src']."' /><br>";
+                                echo "Fonte da imagem: ".$rowO['img_title']."<img src='".$rowO['img_src']."' /><br>";
                               }
                               echo "  Resposta correta: ".$rowO['answer']."</li>";
                             }

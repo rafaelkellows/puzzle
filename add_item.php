@@ -108,19 +108,16 @@
           <label>Pergunta</label>
           <textarea name="question"></textarea>
           <div class="file">
-            <label>Arquivo</label>
+            <label>Arquivo<br><em>Selecione um arquivo de até 100MB.</em></label>
             <input type="file" name="file" id="file" class="hide" />
             <input type="hidden" name='filePath' value="" />
             <div id="image_preview">
-              <p id='loading' class="hide">loading..</p>
-              <div id="message" class="hide"></div>
+              <input type="text" name='figlabel' placeholder="Difina a fonte a imagem" value="" />
               <figure>
                 <img id="previewing" src="images/icons/puzzleIcon.png" />  
                 <figcaption>sem imagem</figcaption>
               </figure>
-              
             </div>
-            <p class="msg hide">Message</p>
             <a class="btn upload home d-middle" href="javascript:void(0);" title="CARREGAR ARQUIVO"><i class="fa fa-upload"></i></a>
           </div>
           <div class="answers">

@@ -15,10 +15,7 @@
     <link href="css/owl-carousel/owl.carousel.css" rel="stylesheet">
     <link href="css/owl-carousel/owl.theme.css" rel="stylesheet">
 
-    <!-- build:css css/styles.min.css-->
-    <link href="css/reset.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-    <!-- endbuild-->
+    <link rel="stylesheet" href="css/styles.min.css"/>
 
     <link href="css/addtohomescreen.css" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="57x57" href="images/icons/apple-icon-57x57.png">
@@ -48,7 +45,7 @@
   </head>
   <body>
   <script>
-    addToHomescreen('http://www.spatula.com/pz3/');
+    addToHomescreen('http://www.spatula.com/pz/');
   </script>    
     <main>
       <form class="puzzle" action="syslogin/controle.php" method="post" target="_self">
@@ -92,17 +89,17 @@
                 <!-- Respostas -->
               </ul>
           </dl>
-          <a class="btn cancel btnCancel" href="javascript:void(0);" value="CANCELAR"><i class="fa fa-times"></i></a>
-          <a class="btn confirm btnConfirm" href="javascript:void(0);" value="CONFIRMAR"><i class="fa fa-check"></i></a>
-          <a class="btn restart btnRestart" href="javascript:void(0);" value="FAZER O TESTE DE NOVO"><i class="fa fa-reply"></i></a>
+          <nav class="qActions">
+            <a class="btn cancel btnCancel" href="javascript:void(0);" value="CANCELAR"><i class="fa fa-times"></i></a>
+            <a class="btn confirm btnConfirm" href="javascript:void(0);" value="CONFIRMAR"><i class="fa fa-check"></i></a>
+            <a class="btn restart btnRestart" href="javascript:void(0);" value="FAZER O TESTE DE NOVO"><i class="fa fa-reply"></i></a>
+          </nav>
           <!--input type="button" class="btnCancel" value="CANCELAR"> <input class="btnConfirm" type="button" value="CONFIRMAR"> <input class="btnRestart" type="button" value="FAZER O TESTE DE NOVO"-->
         </div>
       </form>
 
     </main>
 
-    <!-- build:js js/puzzle.js -->
-    <script type="text/javascript" src="js/puzzle.js"></script>
-    <!-- endbuild -->
+    <script src="js/puzzle.js"></script>
   </body>
 </html>
